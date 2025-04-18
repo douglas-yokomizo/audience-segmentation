@@ -7,8 +7,7 @@ import { User } from "../../core/models/User";
 import { MetricDistributionChart } from "../../ui/components/charts/MetricDistributionChart";
 
 const VisualizationPage: React.FC = () => {
-  const { state: segmentState, dispatch: segmentDispatch } =
-    useSegmentContext();
+  const { state: segmentState } = useSegmentContext();
   const { state: comparisonState, dispatch: comparisonDispatch } =
     useComparisonContext();
 

@@ -5,12 +5,11 @@ import { v4 as uuidv4 } from "uuid";
 import { Filter, FilterType, FilterOperator } from "../../core/models/Filter";
 import { SegmentRepository } from "../../infrastructure/repositories/SegmentRepository";
 import { mockUsers } from "../../infrastructure/mocks/mockUsers";
-import { Segment } from "../../core/models/Segment";
 
 const SegmentBuilderPage: React.FC = () => {
   const { state: segmentState, dispatch: segmentDispatch } =
     useSegmentContext();
-  const { dispatch: uiDispatch } = useUIContext();
+  const { dispatch: _ } = useUIContext(); // Renamed to _ since it's not used
 
   // Get the current segment from context
   const { currentSegment } = segmentState;
@@ -162,7 +161,7 @@ const SegmentBuilderPage: React.FC = () => {
         );
 
         // Update global state
-        segmentDispatch({ type: "UPDATE_SEGMENT", payload: updated });
+        segmentDispatch({ type: "UPDATE_SEGMENT", payload: updated as any });
 
         alert("Segment updated successfully!");
       } else {
@@ -199,7 +198,7 @@ const SegmentBuilderPage: React.FC = () => {
       setSegmentId(undefined);
 
       // Clear current segment in context
-      segmentDispatch({ type: "SET_CURRENT_SEGMENT", payload: null });
+      segmentDispatch({ type: "SET_CURRENT_SEGMENT", payload: null as any });
     } catch (error) {
       console.error("Failed to save segment:", error);
       alert("Failed to save segment. Please try again.");
